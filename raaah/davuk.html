@@ -3,16 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>coded by zenci</title>
+
     <style>
         body {
+            margin: 0;
             color: white;
             background-color: black;
             text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #izinEkrani {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        #izinEkrani button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
         }
     </style>
 </head>
 
 <body>
+
+    <!-- İZİN EKRANI -->
+    <div id="izinEkrani">
+        <h2>Sesi açmak ister misin?</h2>
+        <button id="izinBtn">🔊 Devam Et</button>
+    </div>
 
     <h1>TikTak</h1>
 
@@ -35,9 +63,22 @@
 
     <br><br>
 
-    <!-- Ses BUTONLA başlatılıyor (zorunlu) -->
-    <audio id="ses" src="images/screaming-chicken-on-tree-meme-made-with-Voicemod.mp3" autoplay loop></audio>
+    <!-- SES -->
+    <audio id="ses" src="images/screaming-chicken-on-tree-meme-made-with-Voicemod.mp3" loop></audio>
 
+    <script>
+        const izinBtn = document.getElementById("izinBtn");
+        const izinEkrani = document.getElementById("izinEkrani");
+        const ses = document.getElementById("ses");
+
+        izinBtn.addEventListener("click", () => {
+            ses.play().then(() => {
+                izinEkrani.style.display = "none";
+            }).catch(() => {
+                alert("Tarayıcı sesi engelledi.");
+            });
+        });
+    </script>
 
 </body>
 </html>
